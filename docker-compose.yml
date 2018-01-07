@@ -1,0 +1,15 @@
+version: '3.1'
+
+services:
+
+  proxy-es-aws:
+    build: .
+    environment:
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      DEBUG: ${DEBUG}
+      PORT: ${PORT}
+      REGION: ${REGION}
+      ENDPOINT: ${ENDPOINT}
+    ports:
+      - ${PORT}:${PORT}

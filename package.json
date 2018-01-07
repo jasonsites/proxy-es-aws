@@ -1,0 +1,45 @@
+{
+  "name": "proxy-es-aws",
+  "version": "0.0.1",
+  "description": "Proxy server for AWS Elasticsearch Service",
+  "main": "src/index.js",
+  "bin": "bin/proxy-es-aws",
+  "scripts": {
+    "preinstall": "npm prune",
+    "lint": "eslint ./src",
+    "release": "standard-version",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jasonsites/proxy-es-aws.git"
+  },
+  "keywords": [
+    "aws",
+    "elasticsearch",
+    "es",
+    "kibana",
+    "proxy"
+  ],
+  "author": "Jason Sites <email@jasonsites.com> (https://github.com/jasonsites)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jasonsites/proxy-es-aws/issues"
+  },
+  "homepage": "https://github.com/jasonsites/proxy-es-aws#readme",
+  "dependencies": {
+    "aws-sdk": "^2.176.0",
+    "boom": "^7.1.1",
+    "chalk": "^2.3.0",
+    "koa": "^2.4.1",
+    "koa-bodyparser": "^4.2.0",
+    "koa-compress": "^2.0.0",
+    "standard-version": "^4.3.0",
+    "yargs": "^10.0.3"
+  },
+  "devDependencies": {
+    "eslint": "^4.14.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0"
+  }
+}
