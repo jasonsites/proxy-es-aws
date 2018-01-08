@@ -2,7 +2,6 @@ const Koa = require('koa')
 const bodyParser = require('koa-bodyparser')
 const compress = require('koa-compress')
 const chalk = require('chalk')
-const url = require('url')
 
 const {
   getCredentials,
@@ -43,7 +42,7 @@ app.initialize = async function initialize() {
 
 function createHandler(options) {
   return async (ctx) => {
-    const { credentials, debug, endpoint, region } = options
+    const { credentials, endpoint, region } = options
     const { rawBody: body, header: headers, method, url: path } = ctx.request
 
     console.log(chalk.cyan(method, path))
@@ -55,17 +54,13 @@ function createHandler(options) {
     ctx.type = 'application/json'
     ctx.response.header = stripProxyResHeaders(res)
     ctx.body = res.body
-    if (debug) console.log(ctx.body)
   }
 }
 
 async function getInitOptions(args) {
   const { debug, endpoint, host, port, profile, region } = args
   const options = { debug, host, port, profile, region }
-  if (endpoint && endpoint.startsWith('http')) {
-    const { host: esHost } = url.parse(endpoint)
-    options.endpoint = getEndpoint({ host: esHost })
-  }
+  options.endpoint = getEndpoint({ host: endpoint.replace(/(https?:\/\/)/gi, '') })
   options.credentials = await getCredentials()
   return options
 }

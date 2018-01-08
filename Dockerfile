@@ -1,20 +1,22 @@
 FROM node:carbon
 
+LABEL maintainer="email@jasonsites.com"
+
 ENV HOME /home/app
 ENV NODE_ENV production
 
 RUN apt-get update &&\
+  apt-get upgrade -y &&\
   wget https://github.com/Yelp/dumb-init/releases/download/v1.2.1/dumb-init_1.2.1_amd64.deb &&\
   dpkg -i dumb-init_*.deb &&\
-  apt-get install -y python-dev &&\
-  apt-get install -y python-pip &&\
-  pip install --upgrade pip awscli &&\
-  pip install --upgrade pip awscli &&\
+  # apt-get install -y python-dev &&\
+  # apt-get install -y python-pip &&\
+  # pip install --upgrade pip awscli &&\
   useradd --user-group --create-home --shell /bin/false app
 
 WORKDIR $HOME
 COPY package-lock.json package.json ./
-RUN chown -R app:app $HOME/* && chown -R app:app /usr/local/*
+RUN chown -R app:app $HOME/*
 USER app
 RUN npm i --production
 

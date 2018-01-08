@@ -1,9 +1,7 @@
 const yargs = require('yargs')
 
 const {
-  // AWS_ACCESS_KEY_ID,
   AWS_PROFILE,
-  // AWS_SECRET_ACCESS_KEY,
   DEBUG,
   ENDPOINT,
   HOST,
@@ -34,18 +32,18 @@ function setCliConfiguration() {
       describe: 'Host Port',
       type: 'number',
     })
-    .option('e', {
-      alias: 'endpoint',
-      default: ENDPOINT,
-      demand: true,
-      describe: 'AWS Elasticsearch Endpoint',
-      type: 'string',
-    })
     .option('r', {
       alias: 'region',
       default: REGION || 'us-west-2',
       demand: false,
       describe: 'AWS region',
+      type: 'string',
+    })
+    .option('e', {
+      alias: 'endpoint',
+      default: ENDPOINT,
+      demand: true,
+      describe: 'AWS Elasticsearch Endpoint',
       type: 'string',
     })
     .option('c', {
@@ -55,18 +53,6 @@ function setCliConfiguration() {
       describe: 'AWS Credentials Profile',
       type: 'string',
     })
-    // .option('k', {
-    //   alias: 'keyId',
-    //   default: AWS_ACCESS_KEY_ID,
-    //   demand: false,
-    //   describe: 'AWS Access Key ID',
-    // })
-    // .option('a', {
-    //   alias: 'accessKey',
-    //   default: AWS_SECRET_ACCESS_KEY,
-    //   demand: false,
-    //   describe: 'AWS Secret Access Key',
-    // })
     .option('d', {
       alias: 'debug',
       default: DEBUG || false,
