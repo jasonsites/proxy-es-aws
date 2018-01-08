@@ -1,13 +1,25 @@
 const AWS = require('aws-sdk')
 
 module.exports = {
-  getCredentials,
-  getEndpoint,
-  sendRequest,
-  setCredentialProviderChain,
+  createSignedAWSRequest,
+  getAWSCredentials,
+  getAWSEndpoint,
+  sendAWSRequest,
+  setAWSCredentialProviderChain,
 }
 
-function buildRequest(params) {
+/**
+ * Compose the request data to be sent to the AWS Node HTTP Client
+ * @param {String} params.body        - raw client request body
+ * @param {Object} params.credentials - aws credentials
+ * @param {String} params.endpoint    - aws elasticsearch endpoint
+ * @param {Object} params.headers     - client request headers
+ * @param {String} params.method      - client request method
+ * @param {String} params.path        - client request path (url)
+ * @param {String} params.region      - aws region
+ * @return {Object}
+ */
+function createSignedAWSRequest(params) {
   const { body, credentials, endpoint, headers, method = 'GET', path, region } = params
 
   const request = new AWS.HttpRequest(endpoint)
@@ -22,24 +34,37 @@ function buildRequest(params) {
     region,
   })
 
-  const signed = signRequest({ credentials, request })
+  const signed = signAWSRequest({ credentials, request })
   return mergeAllowedClientHeaders({ headers, request: signed })
 }
 
-function getCredentials() {
+/**
+ * Construct an AWS Credentials object based on data set
+ * in the AWS Credential Provider Chain
+ * @return {Promise}
+ */
+function getAWSCredentials() {
   return new AWS.CredentialProviderChain().resolvePromise()
 }
 
-function getEndpoint({ host }) {
-  return new AWS.Endpoint(host)
+/**
+ * Construct an AWS endpoint object based on ES cluster endpoint
+ * @param {String} params.endpoint -
+ * @return {Object}
+ */
+function getAWSEndpoint({ endpoint }) {
+  return new AWS.Endpoint(endpoint)
 }
 
 /**
- * Add user agent headers, stripping out:
+ * Add client headers, stripping out:
  *  - transport encoding
  *  - connection control
  *  - original unsigned host
  *  - origin
+ * @param {Object} params.headers - client headers
+ * @param {Object} params.request - signed AWS request object
+ *
  */
 function mergeAllowedClientHeaders({ headers, request }) {
   const prohibited = ['accept-encoding', 'connection', 'host', 'origin']
@@ -51,9 +76,13 @@ function mergeAllowedClientHeaders({ headers, request }) {
   return request
 }
 
-function sendRequest(params) {
+/**
+ * AWS HTTP request handler
+ * @param {String} req - signed aws request
+ * @return {Promise}
+ */
+function sendAWSRequest(req) {
   return new Promise((resolve, reject) => {
-    const req = buildRequest(params)
     const send = new AWS.NodeHttpClient()
     send.handleRequest(req, null, (res) => {
       let body = ''
@@ -75,7 +104,16 @@ function sendRequest(params) {
   })
 }
 
-function setCredentialProviderChain({ profile }) {
+/**
+ * Sets the default credential providers in order of precedence:
+ *   1. Environment variables with prefix 'AWS'
+ *   2. Environment variables with prefix 'AMAZON'
+ *   3. AWS profile (from file system config)
+ *   4. EC2 instance metadata service
+ * @param {String} param.profile - aws profile name
+ * @return {undefined}
+ */
+function setAWSCredentialProviderChain({ profile }) {
   AWS.CredentialProviderChain.defaultProviders = [
     () => new AWS.EnvironmentCredentials('AWS'),
     () => new AWS.EnvironmentCredentials('AMAZON'),
@@ -84,7 +122,13 @@ function setCredentialProviderChain({ profile }) {
   ]
 }
 
-function signRequest({ credentials, request }) {
+/**
+ * Signs an AWS HTTP Request object with the provided AWS Credentials object
+ * @param {Object} param.credentials - aws credentials object
+ * @param {Object} param.request     - aws http request object
+ * @return {Object} signed request
+ */
+function signAWSRequest({ credentials, request }) {
   const signer = new AWS.Signers.V4(request, 'es')
   signer.addAuthorization(credentials, new Date())
   return request

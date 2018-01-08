@@ -1,5 +1,11 @@
 const { boomify } = require('boom')
 
+/**
+ * Error handling middleware for all requests
+ * @param {Object} ctx    - request/response context
+ * @param {Function} next - middleware function
+ * @return {Promise}
+ */
 module.exports = async function errorHandler(ctx, next) {
   try {
     await next()

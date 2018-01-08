@@ -11,10 +11,18 @@ const {
 
 module.exports = { getArguments }
 
+/**
+ * Runs the CLI configuration and returns the arguments passed by user
+ * @return {Object}
+ */
 function getArguments() {
   return setCliConfiguration().argv
 }
 
+/**
+ * Defines CLI options
+ * @return {Object}
+ */
 function setCliConfiguration() {
   return yargs
     .usage('usage: $0 [options] <aws-elasticsearch-cluster-endpoint>')
