@@ -72,14 +72,15 @@ function registerListeners({ server }) {
         console.error(err)
         process.exit(1)
       }
+      process.exit(0)
     })
   }
   process.on('SIGINT', () => {
-    console.log(chalk.yellow('Received SIGINT >>> Shutting down...'))
+    console.log(chalk.bgBlack.yellow('Received SIGINT >>> Shutting down...'))
     serverClose()
   })
   process.on('SIGTERM', () => {
-    console.log(chalk.yellow('Received SIGTERM >>> Shutting down...'))
+    console.log(chalk.bgBlack.yellow('Received SIGTERM >>> Shutting down...'))
     serverClose()
   })
 }
