@@ -32,6 +32,7 @@ app.initialize = async function initialize() {
 
     const { port } = options
     app.server = app.listen(port)
+    registerListeners()
     console.log(chalk.magenta(`AWS Elasticsearch Proxy listening on port ${port}`))
   } catch (err) {
     console.error(chalk.red('Error starting application'), err)
@@ -62,6 +63,29 @@ async function getInitOptions(args) {
   options.endpoint = getEndpoint({ host: endpoint.replace(/(https?:\/\/)/gi, '') })
   options.credentials = await getCredentials()
   return options
+}
+
+function registerListeners() {
+  process.on('SIGABRT', () => {
+    console.log(chalk.bgBlack.yellow('Received SIGABRT => Exiting'))
+    process.exit()
+  })
+  process.on('SIGHUP', () => {
+    console.log(chalk.bgBlack.yellow('Received SIGHUP => Exiting'))
+    process.exit()
+  })
+  process.on('SIGINT', () => {
+    console.log(chalk.bgBlack.yellow('Received SIGINT => Exiting'))
+    process.exit()
+  })
+  process.on('SIGQUIT', () => {
+    console.log(chalk.bgBlack.yellow('Received SIGQUIT => Exiting'))
+    process.exit()
+  })
+  process.on('SIGTERM', () => {
+    console.log(chalk.bgBlack.yellow('Received SIGTERM => Exiting'))
+    process.exit()
+  })
 }
 
 function stripProxyResHeaders(res) {
