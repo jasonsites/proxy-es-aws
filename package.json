@@ -1,6 +1,6 @@
 {
   "name": "proxy-es-aws",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Proxy server for AWS Elasticsearch Service",
   "main": "src/index.js",
   "bin": "bin/proxy-es-aws",
