@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.1.4"></a>
+## [0.1.4](https://github.com/jasonsites/proxy-es-aws/compare/v0.1.3...v0.1.4) (2018-01-09)
+
+
+### Bug Fixes
+
+* adds source code comments ([b2bc631](https://github.com/jasonsites/proxy-es-aws/commit/b2bc631))
+* updates README ([9add897](https://github.com/jasonsites/proxy-es-aws/commit/9add897))
+
+
+
 <a name="0.1.3"></a>
 ## [0.1.3](https://github.com/jasonsites/proxy-es-aws/compare/v0.1.2...v0.1.3) (2018-01-08)
 
