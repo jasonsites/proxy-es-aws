@@ -121,7 +121,8 @@ function registerListeners() {
 function stripProxyResHeaders(res) {
   return Object.entries(res.headers).reduce((memo, header) => {
     const [key, val] = header
-    if (key !== undefined && key !== 'connection' && key !== 'content-encoding') {
+    const invalid = [undefined, 'connection', 'content-encoding']
+    if (invalid.indexOf(key) === -1) {
       memo[key] = val // eslint-disable-line
     }
     return memo
