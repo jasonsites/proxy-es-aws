@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/jasonsites/proxy-es-aws#readme",
   "dependencies": {
-    "aws-sdk": "^2.192.0",
+    "aws-sdk": "^2.279.1",
     "boom": "^7.1.1",
     "chalk": "^2.3.1",
     "koa": "^2.5.0",
@@ -37,9 +37,9 @@
     "yargs": "^11.0.0"
   },
   "devDependencies": {
-    "eslint": "^4.17.0",
+    "eslint": "^5.2.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
-    "standard-version": "^4.3.0"
+    "standard-version": "^4.4.0"
   }
 }
