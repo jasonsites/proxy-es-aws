@@ -19,7 +19,6 @@ $ npm i
 
 ## Usage
 ### Examples
-
 Start the proxy using your configured [aws credentials profile](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html)
 ```shell
 $ proxy-es-aws --port {proxy-port} --profile {aws-profile} --region {aws-region} --endpoint {aws-es-cluster-endpoint}
@@ -63,6 +62,6 @@ $ docker-compose up
 ```
 
 ## LICENSE
-Copyright (c) 2018 Jason Sites.
+Copyright (c) 2019 Jason Sites.
 
 Licensed under the [MIT License](LICENSE.md)
