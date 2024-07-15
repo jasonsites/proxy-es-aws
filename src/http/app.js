@@ -1,7 +1,7 @@
+const chalk = require('chalk')
 const Koa = require('koa')
 const bodyParser = require('koa-bodyparser')
 const compress = require('koa-compress')
-const chalk = require('chalk')
 
 const {
   createSignedAWSRequest,
@@ -11,7 +11,7 @@ const {
   setAWSCredentialProviderChain,
 } = require('../aws')
 const { getArguments } = require('../cli')
-const errorHandler = require('./middleware/error-handler')
+const errorHandler = require('./middleware/error-handler') // eslint-disable-line
 
 const app = new Koa()
 

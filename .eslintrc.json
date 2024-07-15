@@ -26,6 +26,21 @@
     "import/no-extraneous-dependencies": [2, {
       "devDependencies": ["**/test/**/*.js"]
     }],
+    "import/order": [2, {
+      "groups": [
+        "builtin",
+        "external",
+        "internal",
+        ["sibling", "parent"],
+        "index",
+        "unknown"
+      ],
+      "newlines-between": "always",
+      "alphabetize": {
+        "order": "asc", // ["ignore", "asc", "desc"]
+        "caseInsensitive": true
+      }
+    }],
     "newline-per-chained-call": 0,
     "no-console": 0,
     "no-underscore-dangle": 0,

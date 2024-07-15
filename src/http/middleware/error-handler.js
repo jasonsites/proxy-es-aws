@@ -1,4 +1,4 @@
-const { boomify } = require('boom')
+const { boomify } = require('@hapi/boom')
 
 /**
  * Error handling middleware for all requests

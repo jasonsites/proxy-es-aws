@@ -2,8 +2,8 @@
 
 ## Installing
 Prerequisites:
-- [Node 8+](https://nodejs.org)
-- [Docker](https://www.docker.com/community-edition#/download) (optional)
+- [Node 18+](https://nodejs.org)
+- [Docker](https://www.docker.com/products/docker-desktop/) (optional)
 
 Install as an executable node module
 ```shell
@@ -48,7 +48,7 @@ $ docker run -it -p {proxy-port}:{proxy-port}\
 # Note: AWS credential profiles are not currently supported while running in a container
 ```
 
-To run via docker-compose, create a `.env` file in the project root, replacing the values for each variable
+To run via docker compose, create a `.env` file in the project root, replacing the values for each variable
 ```
 AWS_ACCESS_KEY_ID={aws-access-key-id}
 AWS_SECRET_ACCESS_KEY={aws-secret-access-key}
@@ -58,10 +58,10 @@ REGION={aws-region}
 ENDPOINT={aws-es-cluster-endpoint}
 ```
 ```shell
-$ docker-compose up
+$ docker compose up
 ```
 
 ## LICENSE
-Copyright (c) 2019 Jason Sites.
+Copyright (c) 2018 Jason Sites.
 
 Licensed under the [MIT License](LICENSE.md)
