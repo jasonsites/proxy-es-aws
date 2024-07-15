@@ -1,4 +1,4 @@
-FROM node:16
+FROM node:18
 
 LABEL maintainer="email@jasonsites.com"
 
@@ -12,7 +12,7 @@ RUN apt-get update && \
   useradd --user-group --create-home --shell /bin/false app
 
 WORKDIR $APP
-COPY package-lock.json package.json ./
+COPY package*.json ./
 RUN chown -R app:app $APP/*
 USER app
 RUN npm i --production
